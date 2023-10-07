@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Weather App</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #0099FF 0%, #33CC33 100%);
+            overflow: hidden;
+        }
+
+        .sun {
+            position: absolute;
+            top: 20%;
+            left: 10%;
+            width: 100px;
+            height: 100px;
+            background: #FFD700;
+            border-radius: 50%;
+            animation: sunRise 10s infinite alternate;
+        }
+
+        .clouds {
+            position: absolute;
+            top: 30%;
+            left: -150px;
+            width: 300px;
+            height: 100px;
+            background: #fff;
+            border-radius: 50px;
+            animation: moveClouds 15s linear infinite;
+        }
+
+        @keyframes sunRise {
+            0% {
+                transform: translateY(0) scale(1);
+            }
+            100% {
+                transform: translateY(-20px) scale(1.2);
+            }
+        }
+
+        @keyframes moveClouds {
+            0% {
+                left: -150px;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+         /* Define the CSS animation */
+         @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Apply the animation to the icon */
+        .animated-icon {
+            animation: spin 2s linear infinite;
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- Sun -->
+    <div class="sun"></div>
+
+    <!-- Clouds -->
+    <div class="clouds"></div>
+
+    <!-- Content -->
+    <div class="container text-center mt-5">
+        <h1>Today's Weather</h1>
+        <p>It's a Beautiful Day Today!</p>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 mt-5 ">
+                    
+                        <!-- <span class="placeholder col-12"></span> -->
+                      </p>
+                        <div class="text-center my-5">
+                            <i class="fas fa-spinner fa-4x animated-icon"></i><b>{%location%} | {%country%}</b>
+                            <p id="date">THU | OCT 5| 10:23 pm</p>
+                        </div>
+                        <div class="text-center">
+                            <h1 class="temp">{%temp%}</h1>
+                            <p class="tem-minmax">Min {%tempmin%} | Max {%tempmax%}</p>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const curdate=document.getElementById('date');
+        const weather=document.getElementById('weathercon');
+        const currentday=()=>{
+            var weekday=new Array(7);
+            weekday[0]='SUN';
+            weekday[1]='MON';
+            weekday[2]='TUE';
+            weekday[3]='WED';
+            weekday[4]='THU';
+            weekday[5]='FRI';
+            weekday[6]='SAT';
+
+            let currenttime=new Date();
+            let days=weekday[currenttime.getDay()];
+            return days;
+        };
+        currentday();
+        const currenttime=()=>{
+            var months=[
+                'JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'
+            ];
+            let now=new Date();
+            var month=months[now.getMonth()] ;
+            var date=now.getDate();
+            var year=now.getFullYear();
+            let hours=now.getHours();
+            let mins=now.getMinutes();
+            let period="AM"
+            if(hours>11){
+                period="PM"
+                if(hours>12) hours-=12;
+            if(mins<10){
+                mins='0'+mins;
+            }
+            }
+            return `${month} ${date} | ${hours}:${mins}${period}`;
+        }
+        
+        curdate.innerHTML=currentday() +" | " + currenttime();
+    </script>
+    <!-- Include Bootstrap and jQuery (for other Bootstrap features) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+
+              
+    
+    
+    
+
+  
